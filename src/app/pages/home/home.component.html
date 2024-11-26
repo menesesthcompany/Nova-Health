@@ -1,0 +1,85 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clínica Vida</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">
+        <img id="logo" src="assets/images/logo.png" alt="Logo">
+      </div>
+      <nav>
+        <ul>
+          <button type="button" class="btn">Agendamento</button>
+          <li><a id="history" href="#history">Nossa História</a></li>
+          <li><a href="#services">Serviços</a></li>
+          <li><a href="#specialties">Especialidades</a></li>
+          <li><a href="#contact">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="hero-section">
+    <div class="container">
+      <div class="hero-text">
+        <h1>Clínica Vida</h1>
+        <p>O cuidado completo com a sua saúde em um só lugar!</p>
+        <a href="#schedule" class="btn-primary">Agendar Consulta</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2024 Clínica Vida. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <div class="chatbot-icon" (click)="openChat()"> 
+    <img src="assets/images/robo.png" alt="Chatbot">
+  </div>
+  
+  <div class="chatbot-window" [class.show]="isChatbotVisible" id="chatbotWindow" *ngIf="isChatbotVisible">
+    <div class="chatbot-header">
+      <img src="assets/images/robo.png" alt="Chatbot" class="chatbot-header-image">
+      <span>Olavio Bot</span>
+      <button (click)="closeChat()" class="close-chat">
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+  
+    <div #chatBody class="chatbot-body">
+      <div *ngFor="let message of messages" class="message-container">
+        <div
+          [ngClass]="{
+            'user-message': message.sender === 'User',
+            'bot-message': message.sender === 'Bot'
+          }"
+          [innerHTML]="message.text"
+        ></div>
+      </div>
+    </div>    
+    
+  
+    <div class="inputchat">
+      <input
+        id="input"
+        autocomplete="off"
+        type="text"
+        [(ngModel)]="userInput"
+        (keyup.enter)="sendMessage()"
+        placeholder="Digite sua mensagem..."
+      />
+      <button class="send-button" (click)="sendMessage()">
+        <img src="assets/images/enviar.png" alt="Enviar">
+      </button>
+    </div>
+  </div>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
